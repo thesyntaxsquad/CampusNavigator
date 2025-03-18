@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Campus Map</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Ensure the map takes full width */
+        #map {
+            height: 1080px; /* You can adjust this height based on your requirements */
+            width: 100%;
+        }
+        .container {
+            max-width: 1080px; /* Limit the width for larger devices */
+            margin: auto;  /* Centering the container */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">CampNav</h1>
+
+        <!-- Form for selecting buildings -->
+        <form method="post" class="mb-3">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="from">From:</label>
+                    <select id="from" name="from" class="form-control">
+                        <option selected disabled>Select a building</option>
+                        {% for building in buildings %}
+                            <option value="{{ building }}">{{ building }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="to">To:</label>
+                    <select id="to" name="to" class="form-control">
+                        <option selected disabled>Select a building</option>
+                        {% for building in buildings %}
+                            <option value="{{ building }}">{{ building }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Get Directions</button>
+        </form>
+
+        <!-- Map display -->
+        <div id="map">
+            {{ map_html|safe }}
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
